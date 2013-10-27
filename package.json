@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "express": "~3.4.3",
-    "winston": "~0.7.2"
+    "winston": "~0.7.2",
+    "jade": "~0.35.0"
   },
   "devDependencies": {
     "mocha": "~1.13.0"

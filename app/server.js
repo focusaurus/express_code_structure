@@ -7,7 +7,11 @@ var app = express();
 var log = require("winston").loggers.get("app:server");
 
 app.set("views", __dirname);
+//use whatever templating system(s) you like
+app.set("view engine", "jade");
 
+//See the README about ordering of middleware
+var AUTOUSING_THE_ROUTER_IS_A_NUISANCE = app.router;
 //Load the routes ("controllers" -ish)
 [
   "app/users/routes",
@@ -19,9 +23,16 @@ app.set("views", __dirname);
     require(routePath)(app);
 });
 
+//OK, routes are loaded, NOW use the router:
+app.use(app.router);
+
+//FINALLY, use any error handlers
+app.use(require("app/middleware").notFound);
+
 //Note that there's not much logic in this file.
 //The server should be mostly "glue" code to set things up and
 //then start listening
+
 
 app.listen(config.express.port, config.express.ip, function (error) {
   if (error) {

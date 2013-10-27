@@ -54,20 +54,32 @@ For the Rails community, they want to be able to have a single Rails developer s
   * This is grep-friendly
   * The JavaScript language is camelCase (toString, toLowerCase, etc), and this: "-" is a minus sign. I don't know why people do `var myModule = require("my-module");`. It's just silly. Don't put minus signs in filesystem paths or package names.
 * Group by Coupling, Not by Function
-  * This is a major departure from the Ruby on Rails convention of app/views, app/controllers, etc
-  * Feauters get added to a full stack, so I want to focus on a full stack of files that are relevant to my feature. When I'm adding a telephone number field to the user model, I don't care about any other controller than the user controller, and I don't care about any other model than the user model.
+  * This is a major departure from the Ruby on Rails convention of `app/views`, `app/controllers`, `app/models`, etc
+  * Feauters get added to a full stack, so I want to focus on a full stack of files that are relevant to my feature. When I'm adding a telephone number field to the user model, I don't care about any controller other than the user controller, and I don't care about any model other than the user model.
   * So instead of editing 6 files that are each in their own directory and ignoring tons of other files in those directories, this repository is organized such that all the files I need to build a feature are colocated
-  * When I change the user controller, that is coupled to the user model and the user view by the nature of MVC, so that means those 3 files will change together, but the deals controller or customer controller are decoupled and thus not involved.
-  * MVC or MOVE style decoupling is still encouraged, but spreading the MVC files out into sibling directories is just annoying
-  * Thus each of my routes files has the portion of the routes it owns. A rails-style routes.rb file is handy if you want an overview of all routes in the app, but when actually building features and fixing bugs, you only care about the routes relevant to the piece you are changing.
+  * When I change the user controller, that is coupled to the user model and the user view by the nature of MVC, so that means those 3 files will often change together, but the deals controller or customer controller are decoupled and thus not involved.
+  * MVC or MOVE style decoupling in terms of which code goes in which module is still encouraged, but spreading the MVC files out into sibling directories is just annoying
+  * Thus each of my routes files has the portion of the routes it owns. A rails-style `routes.rb` file is handy if you want an overview of all routes in the app, but when actually building features and fixing bugs, you only care about the routes relevant to the piece you are changing.
 * Reduce cross-cutting coupling with Events
   * It's easy to think "OK, whenever a new Deal is created, I want to send an email to all the Salespeople", and then just put the code to send those emails in the route that creates deals.
   * However, this coupling will eventually turn your app into a giant ball of mud.
   * Intsead, the DealModel should just fire a "create" event and be entirely unaware of what else the system might do in response to that.
   * When you code this way, it becomes much more possible to put all the user related code into `app/users` because there's not a rat's nest of coupled business logic all over the place polluting the purity of the user code base.
 * Code flow is followable
-  * Don't do magic things. Don't autoload files from magic directories in the filesystem. Don't be ruby. The app starts at `app/server.js:1' and you can see everything it loads and executes by following the code.
+  * Don't do magic things. Don't autoload files from magic directories in the filesystem. Don't be Rails. The app starts at `app/server.js:1` and you can see everything it loads and executes by following the code.
 
+## express.js specifics
+* Don't use `app.configure`. It's almost entirely useless and you just don't need it. It is in lots of boilerplate due to mindless copypasta.
+* THE ORDER OF MIDDLEWARE AND ROUTES IN EXPRESS MATTERS!!!
+  * Almost every routing problem I see on stackoverflow is out-of-order express middleware
+  * In general, you want your routes decoupled and not relying on order that much
+  * Don't use `app.use` for your entire application if you really only need that middleware for 2 routes (I'm looking at you, `bodyParser`)
+  * Make sure when all is said and done you have EXACTLY this order:
+    * Any super-important application-wide middleware
+    * All your routes and assorted route middlewares
+    * THEN app.router
+    * THEN you error handlers
+* Sadly, being sinatra-inspired, express.js mostly assumes all your routes will be in `server.js` and it will be clear how they are ordered. For a medium-sized application, breaking things out into separate routes modules is nice, but it does introduce peril of out-of-order middleware
 
 ## The app symlink trick
 

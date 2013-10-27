@@ -7,6 +7,11 @@ function needUser(req, res, next) {
   res.redirect("/sign-in?next=" + encodeURIComponent(req.path));
 }
 
+function notFound(req, res) {
+  res.status(404).render("errors/notFound");
+}
+
 module.exports = {
-  needUser: needUser
+  needUser: needUser,
+  notFound: notFound
 };
