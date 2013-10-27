@@ -1,12 +1,12 @@
 #Express Code Structure
 
-This project is an example of how to organize a medium-size express.js web application.
+This project is an example of how to organize a medium-sized express.js web application.
 
 ## How big is your application?
 
-Web applications are not all the same, and there's not, in my opinion, a single code structure that should be applied to all express.js applications
+Web applications are not all the same, and there's not, in my opinion, a single code structure that should be applied to all express.js applications.
 
-If your application is small, you don't need such a deep directory structure as exemplified here. Just keep it simple and stick a handful of .js files in the root of your repository and you're done. Voila.
+If your application is small, you don't need such a deep directory structure as exemplified here. Just keep it simple and stick a handful of `.js` files in the root of your repository and you're done. Voilà.
 
 If your application is huge, at some point you need to break it up into distinct npm packages. In general the node.js approach seems to favor many small packages, at least for libraries, and you should build your application up by using several npm packages as that starts to make sense and justify the overhead. So as your application grows and some portion of the code becomes clearly reusable outside of your application or is a clear subsystem, move it to it's own git repository and make it into a standalone npm package.
 
@@ -24,7 +24,7 @@ There are many approaches to building a web application, such as
 
 Each of these fits nicely into a different directory structure. For the purposes of this example, it's just scaffolding and not a fully working app, but I'm assuming the following key architecture points:
 
-* The site has some traditional static pages
+* The site has some traditional static pages/templates
 * The "application" portion of the site is developed as a Single Page Application style
 * The application exposes a REST/JSON style API to the browser
 * The app models a simple business domain, in this case, it's a car dealership application
@@ -34,6 +34,8 @@ Each of these fits nicely into a different directory structure. For the purposes
 It will be a theme throughout this project that many of the ideas embodied in Ruby on Rails and the "Convention over Configuration" decisions they have adopted, though widely accepted and used, are not actually very helpful and sometimes are the opposite of what this repository recommends.
 
 My main point here is that there are underlying principles to organizing code, and based on those principles, the Ruby on Rails conventions make sense (mostly) for the Ruby on Rails community. However, just thoughtlessly aping those conventions misses the point. Once you grok the basic principles, ALL of your projects will be well-organized and clear: shell scripts, games, mobile apps, enterprise projects, even your home directory.
+
+For the Rails community, they want to be able to have a single Rails developer switch from app to app to app and be familiar and comfortable with it each time. This makes great sense if you are 37 signals or Pivotal Labs, and has benefits. In the server-side JavaScript world, the overall ethos is just way more wild west anything goes and we don't really have a problem with that. That's how we roll. We're used to it. Even within express.js, it's a close kin of Sinatra, not Rails, and taking conventions from Rails is usually not helping anything. I'd even say **Principles over Convention over Configuration**.
 
 ## Underlying Principles and Motivations
 
@@ -58,6 +60,11 @@ My main point here is that there are underlying principles to organizing code, a
   * When I change the user controller, that is coupled to the user model and the user view by the nature of MVC, so that means those 3 files will change together, but the deals controller or customer controller are decoupled and thus not involved.
   * MVC or MOVE style decoupling is still encouraged, but spreading the MVC files out into sibling directories is just annoying
   * Thus each of my routes files has the portion of the routes it owns. A rails-style routes.rb file is handy if you want an overview of all routes in the app, but when actually building features and fixing bugs, you only care about the routes relevant to the piece you are changing.
+* Reduce cross-cutting coupling with Events
+  * It's easy to think "OK, whenever a new Deal is created, I want to send an email to all the Salespeople", and then just put the code to send those emails in the route that creates deals.
+  * However, this coupling will eventually turn your app into a giant ball of mud.
+  * Intsead, the DealModel should just fire a "create" event and be entirely unaware of what else the system might do in response to that.
+  * When you code this way, it becomes much more possible to put all the user related code into `app/users` because there's not a rat's nest of coupled business logic all over the place polluting the purity of the user code base.
 * Code flow is followable
   * Don't do magic things. Don't autoload files from magic directories in the filesystem. Don't be ruby. The app starts at `app/server.js:1' and you can see everything it loads and executes by following the code.
 
