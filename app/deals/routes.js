@@ -1,5 +1,6 @@
 //Let's say our car dealership has a "deals" entity with
 //typical Create Read Update Delete (CRUD/REST) operations
+var DealModel = require('app/deals/DealModel');
 
 function createDeal(req, res) {
   //...
@@ -28,3 +29,5 @@ function setup(app) {
   app.put('/deals/:id', updateDeal);
   app.del('/deals/:id', deleteDeal);
 }
+
+module.exports = setup;
