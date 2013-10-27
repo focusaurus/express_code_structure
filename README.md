@@ -1,4 +1,3 @@
-express_code_structure
-======================
+#Express Code Structure
 
-Example of how to organize a medium-size express.js web application
+This project is an example of how to organize a medium-size express.js web application.
