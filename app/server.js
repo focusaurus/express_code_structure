@@ -12,3 +12,12 @@ app.set("views", __dirname);
 ].forEach(function (routePath) {
     require(routePath)(app);
 });
+
+app.listen(config.express.port, config.express.ip, function (error) {
+  if (error) {
+    log.error("Unable to listen for connections", error);
+    process.exit(10);
+  }
+  log.info("express is listening on " +
+    config.express.ip + ":" + config.express.port);
+});
