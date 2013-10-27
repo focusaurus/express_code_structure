@@ -97,8 +97,9 @@ So one way to avoid intra-project requires with annoying relative paths like `re
   * No, you should not put "node_modules" into your git repository. Some people will recommend you do this. They are incorrect.
 * Now you can require intra-project modules using this prefix
   * `var config = require("app/config");`
-  * `var DealModel = require("app/deals/DealModel");
+  * `var DealModel = require("app/deals/DealModel")`;
 * Basically, this makes intra-project requires work very similarly to requires for external npm modules.
+* Sorry, Windows users, you need to stick with parent directory relative paths.
 
 ## Configuration
 
@@ -108,7 +109,7 @@ Try to centralize creation of DB connections and pass those into subsystems as o
 
 ### NODE_ENV
 
-This is another terrible idea carried over from Rails. There should be exactly 1 place in your app, `app/config.js` that looks at the `NODE_ENV` environment variable. Everything else should take an explicit option as a class contsructor argument or module configuration parameter.
+This is another enticing but terrible idea carried over from Rails. There should be exactly 1 place in your app, `app/config.js` that looks at the `NODE_ENV` environment variable. Everything else should take an explicit option as a class contsructor argument or module configuration parameter.
 
 If the email module has an option as to how to deliver emails (SMTP, log to stdout, put in queue etc), it should take an option like `{deliver: 'stdout'}` but it should absolutely not check `NODE_ENV`.
 
