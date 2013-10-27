@@ -98,6 +98,12 @@ So one way to avoid intra-project requires with annoying relative paths like `re
   * `var DealModel = require("app/deals/DealModel");
 * Basically, this makes intra-project requires work very similarly to requires for external npm modules.
 
+## Configuration
+
+Generally code modules and classes to expect only a basic JavaScript `options` object passed in. Only `app/server.js` should load the `app/config.js` module. From there it can synthesize small `options` objects to configure subsystems as needed, but coupling every subsystem to a big global config module full of extra information is bad coupling.
+
+Try to centralize creation of DB connections and pass those into subsystems as opposed to passing connection parameters and having subsystems make outgoing connections themselves.
+
 ## Tests
 
 Setup up a "test" directory that is an exact mirror of the "app" directory.
