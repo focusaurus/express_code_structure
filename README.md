@@ -41,6 +41,8 @@ For the Rails community, they want to be able to have a single Rails developer s
 
 * Be mentally manageable
   * The brain can only deal with and think about a small number of related things at once. That's why we use directories. It helps us deal with complexity by focusing on small portions.
+* Be size-appropriate
+  * Don't create "Mansion Directories" where there's just 1 file all alone 3 directories down. You can see this happening in the [Ansible Best Practices](http://www.ansibleworks.com/docs/playbooks_best_practices.html) that shames small projects into creating 10+ directories to hold 10+ files when 1 directory with 3 files would be much more appropriate. You don't drive a bus to work (unless you're a bus driver, but even then your driving a bus AT work not TO work), so don't create filesystem structures that aren't justified by the actual files inside them.
 * Be easy to locate code
   * Given a feature to build or a bug to fix, our goal is that a developer has no struggle locating the source files involved.
     * Names are meaningful and accurate
@@ -104,14 +106,20 @@ Generally code modules and classes to expect only a basic JavaScript `options` o
 
 Try to centralize creation of DB connections and pass those into subsystems as opposed to passing connection parameters and having subsystems make outgoing connections themselves.
 
+### NODE_ENV
+
+This is another terrible idea carried over from Rails. There should be exactly 1 place in your app, `app/config.js` that looks at the `NODE_ENV` environment variable. Everything else should take an explicit option as a class contsructor argument or module configuration parameter.
+
+If the email module has an option as to how to deliver emails (SMTP, log to stdout, put in queue etc), it should take an option like `{deliver: 'stdout'}` but it should absolutely not check `NODE_ENV`.
+
 ## Tests
 
 Setup up a "test" directory that is an exact mirror of the "app" directory.
 
-* code lives in app/users/UserModel.js
-* tests go in test/app/users/UserModel.js
+* code lives in `app/users/UserModel.js`
+* tests go in `test/app/users/UserModel.js`
 
-## How to organize code within each .js module file
+## How to organize code within each `.js` module file
 
 This project's scope is mostly about where files and directories go, and I don't want to add much other scope, but I'll just mention that I organize my code into 3 distinct sections.
 
