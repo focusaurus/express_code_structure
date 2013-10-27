@@ -57,8 +57,8 @@ For the Rails community, they want to be able to have a single Rails developer s
   * This is a major departure from the Ruby on Rails convention of `app/views`, `app/controllers`, `app/models`, etc
   * Feauters get added to a full stack, so I want to focus on a full stack of files that are relevant to my feature. When I'm adding a telephone number field to the user model, I don't care about any controller other than the user controller, and I don't care about any model other than the user model.
   * So instead of editing 6 files that are each in their own directory and ignoring tons of other files in those directories, this repository is organized such that all the files I need to build a feature are colocated
-  * When I change the user controller, that is coupled to the user model and the user view by the nature of MVC, so that means those 3 files will often change together, but the deals controller or customer controller are decoupled and thus not involved.
-  * MVC or MOVE style decoupling in terms of which code goes in which module is still encouraged, but spreading the MVC files out into sibling directories is just annoying
+  * By the nature of MVC, the user view is coupled to the user controller which is coupled to the user model. So when I change the user model, those 3 files will often change together, but the deals controller or customer controller are decoupled and thus not involved.
+  * MVC or MOVE style decoupling in terms of which code goes in which module is still encouraged, but spreading the MVC files out into sibling directories is just annoying.
   * Thus each of my routes files has the portion of the routes it owns. A rails-style `routes.rb` file is handy if you want an overview of all routes in the app, but when actually building features and fixing bugs, you only care about the routes relevant to the piece you are changing.
 * Reduce cross-cutting coupling with Events
   * It's easy to think "OK, whenever a new Deal is created, I want to send an email to all the Salespeople", and then just put the code to send those emails in the route that creates deals.
@@ -67,6 +67,8 @@ For the Rails community, they want to be able to have a single Rails developer s
   * When you code this way, it becomes much more possible to put all the user related code into `app/users` because there's not a rat's nest of coupled business logic all over the place polluting the purity of the user code base.
 * Code flow is followable
   * Don't do magic things. Don't autoload files from magic directories in the filesystem. Don't be Rails. The app starts at `app/server.js:1` and you can see everything it loads and executes by following the code.
+  * Don't make DSLs for your routes. Don't do silly metaprogramming when it is not called for.
+  * If your app is so big that doing `magicRESTRouter.route(somecontroller, {except: 'POST'})` is a big win for you over 3 basic `app.get`, `app.put`, `app.del`, calls, you're probably building a monolithic app that is too big to effectively work on. Get fancy for BIG wins, not for converting 3 simple lines to 1 complex line.
 
 ## express.js specifics
 * Don't use `app.configure`. It's almost entirely useless and you just don't need it. It is in lots of boilerplate due to mindless copypasta.
