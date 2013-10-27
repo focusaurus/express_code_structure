@@ -120,6 +120,8 @@ Setup up a "test" directory that is an exact mirror of the "app" directory.
 * code lives in `app/users/UserModel.js`
 * tests go in `test/app/users/UserModel.js`
 
+(Yes, I realize this is somewhat contrary to my above tirade against `app/controllers`. Ultimately I'd rather scatter 'test' directories with the 'app' tree, I think, but it's so nice to just type "mocha" and have your tests run that at least for the moment I still follow this convention, and yes I realize this is not self-consistent.)
+
 ## How to organize code within each `.js` module file
 
 This project's scope is mostly about where files and directories go, and I don't want to add much other scope, but I'll just mention that I organize my code into 3 distinct sections.
