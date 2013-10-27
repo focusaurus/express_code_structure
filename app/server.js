@@ -8,7 +8,8 @@ app.set("views", __dirname);
   "app/users/routes",
   "app/vehicles/routes",
   "app/customers/routes",
-  "app/deals/routes"
+  "app/deals/routes",
+  "app/site/routes"
 ].forEach(function (routePath) {
     require(routePath)(app);
 });
