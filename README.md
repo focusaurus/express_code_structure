@@ -47,6 +47,8 @@ For the Rails community, they want to be able to have a single Rails developer s
   * Given a feature to build or a bug to fix, our goal is that a developer has no struggle locating the source files involved.
     * Names are meaningful and accurate
     * crufty code is fully removed, not left around in an orphan file or just commented out
+* Be search-friendly
+  * all first-party source code is in the `app` directory so you can `cd` there are run find/grep/xargs/ack/ag/etc and not be distracted by third party matches
 * Use simple and obvious naming
   * Almost every module in this application has a valid JavaScript identifier as its filename so this pattern is consistent:
     * var MyClass = require("app/MyClass");
