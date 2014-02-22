@@ -89,6 +89,8 @@ For the Rails community, they want to be able to have a single Rails developer s
 
 ## The app symlink trick
 
+There are many approaches outlined and discussed at length by the community in the great gist [Better local require() paths for Node.js](https://gist.github.com/branneman/8048520). I may soon decide to prefer either "just deal with lots of ../../../.." or use the [requireFrom](https://github.com/DSKrepps/requireFrom) modlue. However, at the moment, I've been using the symlink trick detailed below.
+
 So one way to avoid intra-project requires with annoying relative paths like `require("../../../config")` is to use the following trick:
 
 * create a symlink under node_modules for your app
