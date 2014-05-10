@@ -2,6 +2,7 @@
 var config = require("app/config");
 var express = require("express");
 var app = express();
+
 //Use whichever logging system you prefer.
 //Doesn't have to be winston, I just wanted something more or less realistic
 var log = require("winston").loggers.get("app:server");
@@ -22,9 +23,6 @@ var AUTOUSING_THE_ROUTER_IS_A_NUISANCE = app.router;
 ].forEach(function (routePath) {
     require(routePath)(app);
 });
-
-//OK, routes are loaded, NOW use the router:
-app.use(app.router);
 
 //FINALLY, use any error handlers
 app.use(require("app/middleware").notFound);

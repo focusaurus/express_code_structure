@@ -27,7 +27,7 @@ function setup(app) {
   app.get('/deals/:id', getDeal);
   app.get('/deals', getDeals);
   app.put('/deals/:id', updateDeal);
-  app.del('/deals/:id', deleteDeal);
+  app.delete('/deals/:id', deleteDeal);
 }
 
 module.exports = setup;
