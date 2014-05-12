@@ -83,7 +83,6 @@ For the Rails community, they want to be able to have a single Rails developer s
   * Make sure when all is said and done you have EXACTLY this order:
     * Any super-important application-wide middleware
     * All your routes and assorted route middlewares
-    * THEN app.router
     * THEN error handlers
 * Sadly, being sinatra-inspired, express.js mostly assumes all your routes will be in `server.js` and it will be clear how they are ordered. For a medium-sized application, breaking things out into separate routes modules is nice, but it does introduce peril of out-of-order middleware
 

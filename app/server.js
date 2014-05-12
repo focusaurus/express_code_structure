@@ -12,7 +12,6 @@ app.set("views", __dirname);
 app.set("view engine", "jade");
 
 //See the README about ordering of middleware
-var AUTOUSING_THE_ROUTER_IS_A_NUISANCE = app.router;
 //Load the routes ("controllers" -ish)
 [
   "app/users/routes",
