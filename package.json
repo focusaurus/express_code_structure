@@ -22,11 +22,11 @@
     "url": "https://github.com/focusaurus/express_code_structure/issues"
   },
   "dependencies": {
-    "express": "~3.4.3",
-    "winston": "~0.7.2",
-    "jade": "~0.35.0"
+    "jade": "~1.3.1",
+    "express": "~4.1.2",
+    "winston": "~0.7.3"
   },
   "devDependencies": {
-    "mocha": "~1.13.0"
+    "mocha": "~1.18.2"
   }
 }
