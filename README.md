@@ -59,7 +59,7 @@ For the Rails community, they want to be able to have a single Rails developer s
   * The JavaScript language is camelCase (toString, toLowerCase, etc), and this: "-" is a minus sign. I don't know why people do `var myModule = require("my-module");`. It's just silly. Don't put minus signs in filesystem paths or package names.
 * Group by Coupling, Not by Function
   * This is a major departure from the Ruby on Rails convention of `app/views`, `app/controllers`, `app/models`, etc
-  * Feauters get added to a full stack, so I want to focus on a full stack of files that are relevant to my feature. When I'm adding a telephone number field to the user model, I don't care about any controller other than the user controller, and I don't care about any model other than the user model.
+  * Features get added to a full stack, so I want to focus on a full stack of files that are relevant to my feature. When I'm adding a telephone number field to the user model, I don't care about any controller other than the user controller, and I don't care about any model other than the user model.
   * So instead of editing 6 files that are each in their own directory and ignoring tons of other files in those directories, this repository is organized such that all the files I need to build a feature are colocated
   * By the nature of MVC, the user view is coupled to the user controller which is coupled to the user model. So when I change the user model, those 3 files will often change together, but the deals controller or customer controller are decoupled and thus not involved.
   * MVC or MOVE style decoupling in terms of which code goes in which module is still encouraged, but spreading the MVC files out into sibling directories is just annoying.
