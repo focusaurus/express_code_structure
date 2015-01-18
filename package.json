@@ -1,16 +1,15 @@
 {
   "name": "express_code_structure",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "description": "Scaffolding explaining a method for organizing files in an express.js web application project",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "mocha"
+    "test": "./bin/test.sh",
+    "start": "./app/server.js | bistre",
+    "lint": "./bin/lint.sh"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/focusaurus/express_code_structure"
+    "url": "https://github.com/focusaurus/express_code_structure.git"
   },
   "keywords": [
     "express.js",
@@ -22,11 +21,14 @@
     "url": "https://github.com/focusaurus/express_code_structure/issues"
   },
   "dependencies": {
-    "jade": "~1.3.1",
+    "bole": "2.0.0",
     "express": "~4.1.2",
-    "winston": "~0.7.3"
+    "jade": "~1.3.1"
   },
   "devDependencies": {
-    "mocha": "~1.18.2"
+    "bistre": "1.0.1",
+    "eslint": "0.12.0",
+    "supertest": "0.15.0",
+    "tape": "3.2.0"
   }
 }

@@ -1,36 +1,19 @@
 #!/usr/bin/env node
+var app = require("./index");
 var config = require("app/config");
-var express = require("express");
-var app = express();
 
 //Use whichever logging system you prefer.
-//Doesn't have to be winston, I just wanted something more or less realistic
-var log = require("winston").loggers.get("app:server");
+//Doesn't have to be bole, I just wanted something more or less realistic
+var bole = require("bole");
 
-app.set("views", __dirname);
-//use whatever templating system(s) you like
-app.set("view engine", "jade");
+bole.output({level: "debug", stream: process.stdout});
+var log = bole("server");
 
-//See the README about ordering of middleware
-//Load the routes ("controllers" -ish)
-[
-  "app/users/routes",
-  "app/vehicles/routes",
-  "app/customers/routes",
-  "app/deals/routes",
-  "app/site/routes"
-].forEach(function (routePath) {
-    require(routePath)(app);
-});
-
-//FINALLY, use any error handlers
-app.use(require("app/middleware").notFound);
+log.info("server process starting");
 
 //Note that there's not much logic in this file.
 //The server should be mostly "glue" code to set things up and
 //then start listening
-
-
 app.listen(config.express.port, config.express.ip, function (error) {
   if (error) {
     log.error("Unable to listen for connections", error);
