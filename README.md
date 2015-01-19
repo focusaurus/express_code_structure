@@ -2,6 +2,8 @@
 
 This project is an example of how to organize a medium-sized express.js web application.
 
+**Current to at least express v4.11 January 2015**
+
 ## How big is your application?
 
 Web applications are not all the same, and there's not, in my opinion, a single code structure that should be applied to all express.js applications.
@@ -43,12 +45,15 @@ For the Rails community, they want to be able to have a single Rails developer s
   * The brain can only deal with and think about a small number of related things at once. That's why we use directories. It helps us deal with complexity by focusing on small portions.
 * Be size-appropriate
   * Don't create "Mansion Directories" where there's just 1 file all alone 3 directories down. You can see this happening in the [Ansible Best Practices](http://www.ansibleworks.com/docs/playbooks_best_practices.html) that shames small projects into creating 10+ directories to hold 10+ files when 1 directory with 3 files would be much more appropriate. You don't drive a bus to work (unless you're a bus driver, but even then your driving a bus AT work not TO work), so don't create filesystem structures that aren't justified by the actual files inside them.
+* Be modular but pragmatic
+  * The node community overall favors small modules. Anything that can cleanly be separated out from your app entirely should be extracted into a module either for internal use or publically published on npm. However but for the medium-sized applications that are the scope here, the overhead of this can add tedium to your workflow without commensurate value. So for the time when you have some code that is factored out but not enough to justify a completely separate npm module, just consider it a "**proto-module**" with the expectation that when it crosses some size threshold, it would be extracted out.
+  * Some folks such as [@hij1nx](https://twitter.com/hij1nx) even include an `app/node_modules` directory and have `package.json` files in the **proto-module** directories to facilitate that transition and act as a reminder.
 * Be easy to locate code
   * Given a feature to build or a bug to fix, our goal is that a developer has no struggle locating the source files involved.
     * Names are meaningful and accurate
     * crufty code is fully removed, not left around in an orphan file or just commented out
 * Be search-friendly
-  * all first-party source code is in the `app` directory so you can `cd` there are run find/grep/xargs/ack/ag/etc and not be distracted by third party matches
+  * all first-party source code is in the `app` directory so you can `cd` there are run find/grep/xargs/ag/ack/etc and not be distracted by third party matches
 * Use simple and obvious naming
   * Almost every module in this application has a valid JavaScript identifier as its filename so this pattern is consistent:
     * var MyClass = require("app/MyClass");
@@ -61,9 +66,11 @@ For the Rails community, they want to be able to have a single Rails developer s
   * This is a major departure from the Ruby on Rails convention of `app/views`, `app/controllers`, `app/models`, etc
   * Feauters get added to a full stack, so I want to focus on a full stack of files that are relevant to my feature. When I'm adding a telephone number field to the user model, I don't care about any controller other than the user controller, and I don't care about any model other than the user model.
   * So instead of editing 6 files that are each in their own directory and ignoring tons of other files in those directories, this repository is organized such that all the files I need to build a feature are colocated
-  * By the nature of MVC, the user view is coupled to the user controller which is coupled to the user model. So when I change the user model, those 3 files will often change together, but the deals controller or customer controller are decoupled and thus not involved.
+  * By the nature of MVC, the user view is coupled to the user controller which is coupled to the user model. So when I change the user model, those 3 files will often change together, but the deals controller or customer controller are decoupled and thus not involved. Same applies to non-MVC designs usually as well.
   * MVC or MOVE style decoupling in terms of which code goes in which module is still encouraged, but spreading the MVC files out into sibling directories is just annoying.
   * Thus each of my routes files has the portion of the routes it owns. A rails-style `routes.rb` file is handy if you want an overview of all routes in the app, but when actually building features and fixing bugs, you only care about the routes relevant to the piece you are changing.
+* Store tests next to the code
+  * This is just an instance of "group by coupling", but I wanted to call it out specifically. I've written many projects where the tests live under a parallel filesystem called "tests" and now that I've started putting my tests in the same directory as their corresponding code, I'm never going back. This is more modular and much easier to work with in text editors and alleviates a lot of the "../../.." path nonsense.
 * Reduce cross-cutting coupling with Events
   * It's easy to think "OK, whenever a new Deal is created, I want to send an email to all the Salespeople", and then just put the code to send those emails in the route that creates deals.
   * However, this coupling will eventually turn your app into a giant ball of mud.
@@ -118,12 +125,13 @@ If the email module has an option as to how to deliver emails (SMTP, log to stdo
 
 ## Tests
 
-Setup up a "test" directory that is an exact mirror of the "app" directory.
+I now keep my test files in the same directory as their corresponding code and use filename extension naming conventions to distinguish tests from production code.
 
-* code lives in `app/users/UserModel.js`
-* tests go in `test/app/users/UserModel.js`
+- `foo.js` has the module "foo"'s code
+- `foo.ntest.js` has the node-based tests for foo and lives in the same dir
+- `foo.btest.js` can be used for tests that need to execute in a browser environment
 
-(Yes, I realize this is somewhat contrary to my above tirade against `app/controllers`. Ultimately I'd rather scatter 'test' directories with the 'app' tree, I think, but it's so nice to just type "mocha" and have your tests run that at least for the moment I still follow this convention, and yes I realize this is not self-consistent.)
+I use filesystem globs and the `find . -name '*.ntest.js'` command to get access to all my tests as necessary.  
 
 ## How to organize code within each `.js` module file
 
