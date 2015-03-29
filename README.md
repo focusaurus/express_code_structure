@@ -74,7 +74,7 @@ For the Rails community, they want to be able to have a single Rails developer s
 * Reduce cross-cutting coupling with Events
   * It's easy to think "OK, whenever a new Deal is created, I want to send an email to all the Salespeople", and then just put the code to send those emails in the route that creates deals.
   * However, this coupling will eventually turn your app into a giant ball of mud.
-  * Intsead, the DealModel should just fire a "create" event and be entirely unaware of what else the system might do in response to that.
+  * Instead, the DealModel should just fire a "create" event and be entirely unaware of what else the system might do in response to that.
   * When you code this way, it becomes much more possible to put all the user related code into `app/users` because there's not a rat's nest of coupled business logic all over the place polluting the purity of the user code base.
 * Code flow is followable
   * Don't do magic things. Don't autoload files from magic directories in the filesystem. Don't be Rails. The app starts at `app/server.js:1` and you can see everything it loads and executes by following the code.
@@ -88,9 +88,9 @@ For the Rails community, they want to be able to have a single Rails developer s
   * In general, you want your routes decoupled and not relying on order that much
   * Don't use `app.use` for your entire application if you really only need that middleware for 2 routes (I'm looking at you, `bodyParser`)
   * Make sure when all is said and done you have EXACTLY this order:
-    * Any super-important application-wide middleware
-    * All your routes and assorted route middlewares
-    * THEN error handlers
+    1. Any super-important application-wide middleware
+    1. All your routes and assorted route middlewares
+    1. THEN error handlers
 * Sadly, being sinatra-inspired, express.js mostly assumes all your routes will be in `server.js` and it will be clear how they are ordered. For a medium-sized application, breaking things out into separate routes modules is nice, but it does introduce peril of out-of-order middleware
 
 ## The app symlink trick
