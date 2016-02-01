@@ -1,10 +1,10 @@
-function needUser(req, res, next) {
+function needUser (req, res, next) {
   if (req.session.user) {
-    next();
-    return;
+    next()
+    return
   }
-  //This is pseudocode, just to convey a basic idea...
-  res.redirect("/sign-in?next=" + encodeURIComponent(req.path));
+  // This is pseudocode, just to convey a basic idea...
+  res.redirect('/sign-in?next=' + encodeURIComponent(req.path))
 }
 
-module.exports = needUser;
+module.exports = needUser
