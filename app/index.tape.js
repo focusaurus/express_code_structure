@@ -1,4 +1,4 @@
-var app = require("app/testApp");
+var app = require("app/test-app");
 var test = require("tape");
 
 test("the express app should serve the favicon", function (assert) {

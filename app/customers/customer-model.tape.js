@@ -1,5 +1,5 @@
 var test = require("tape");
-var customer = require("./customerModel");
+var customer = require("./customer-model");
 
 test("customer.findAll should return an array", function(assert) {
   customer.findAll(function(error, result) {

@@ -1,4 +1,4 @@
-var customer = require("./customerModel");
+var customer = require("./customer-model");
 var log = require("bole")("customers/router");
 var router = require("express").Router();
 

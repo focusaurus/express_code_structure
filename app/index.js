@@ -13,7 +13,7 @@ app.use("/api", require("app/users/router"));
 // Repeat the above line for additional model areas ("deals", "vehicles", etc)
 
 //FINALLY, use any error handlers
-app.use(require("app/errors/notFound"));
+app.use(require("app/errors/not-found"));
 
 // Export the app instance for unit testing via supertest
 module.exports = app;

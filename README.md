@@ -55,13 +55,8 @@ For the Rails community, they want to be able to have a single Rails developer s
 * Be search-friendly
   * all first-party source code is in the `app` directory so you can `cd` there are run find/grep/xargs/ag/ack/etc and not be distracted by third party matches
 * Use simple and obvious naming
-  * Almost every module in this application has a valid JavaScript identifier as its filename so this pattern is consistent:
-    * var MyClass = require("app/MyClass");
-    * var moduleOfFunctions = require("app/moduleOfFunctions");
-    * var oneFunctionModule = require("app/blah/oneFunctionModule");
-  * variable name matches the basename of the module path
-  * This is grep-friendly
-  * The JavaScript language is camelCase (toString, toLowerCase, etc), and this: "-" is a minus sign. I don't know why people do `var myModule = require("my-module");`. It's just silly. Don't put minus signs in filesystem paths or package names.
+  * npm now seems to require all-lowercase package names. I find this mostly terrible but I must follow the herd, thus filenames should use `kebab-case` even though the variable name for that in JavaScript must be `kebabCase` because `-` is a minus sign in JavaScript.
+  * variable name matches the basename of the module path, but with `kebab-case` transformed to `camelCase`
 * Group by Coupling, Not by Function
   * This is a major departure from the Ruby on Rails convention of `app/views`, `app/controllers`, `app/models`, etc
   * Feauters get added to a full stack, so I want to focus on a full stack of files that are relevant to my feature. When I'm adding a telephone number field to the user model, I don't care about any controller other than the user controller, and I don't care about any model other than the user model.
@@ -128,10 +123,10 @@ If the email module has an option as to how to deliver emails (SMTP, log to stdo
 I now keep my test files in the same directory as their corresponding code and use filename extension naming conventions to distinguish tests from production code.
 
 - `foo.js` has the module "foo"'s code
-- `foo.ntest.js` has the node-based tests for foo and lives in the same dir
-- `foo.btest.js` can be used for tests that need to execute in a browser environment
+- `foo.tape.js` has the node-based tests for foo and lives in the same dir
+- `foo.btape.js` can be used for tests that need to execute in a browser environment
 
-I use filesystem globs and the `find . -name '*.ntest.js'` command to get access to all my tests as necessary.  
+I use filesystem globs and the `find . -name '*.tape.js'` command to get access to all my tests as necessary.  
 
 ## How to organize code within each `.js` module file
 

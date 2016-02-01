@@ -1,4 +1,4 @@
-var app = require("app/testApp");
+var app = require("app/test-app");
 var test = require("tape");
 
 test("GET /api/customers should send JSON list", function (assert) {
