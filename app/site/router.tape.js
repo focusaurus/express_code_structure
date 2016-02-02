@@ -1,5 +1,5 @@
 var app = require('app/test-app')
-var test = require('tape')
+var test = require('prova')
 
 test('app/site/router should serve the favicon', function (assert) {
   app.get('/favicon.ico')

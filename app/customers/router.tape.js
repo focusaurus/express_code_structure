@@ -1,5 +1,5 @@
 var app = require('app/test-app')
-var test = require('tape')
+var test = require('prova')
 
 test('GET /api/customers should send JSON list', function (assert) {
   app.get('/api/customers')
