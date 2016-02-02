@@ -1,6 +1,6 @@
 {
   "name": "express_code_structure",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Scaffolding explaining a method for organizing files in an express.js web application project",
   "scripts": {
     "test": "./bin/test.sh",
