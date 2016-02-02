@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "Scaffolding explaining a method for organizing files in an express.js web application project",
   "scripts": {
-    "test": "prova ./app/**/*.tape.js",
+    "test": "./bin/test.sh",
     "start": "./app/server.js | bistre",
     "lint": "standard"
   },
