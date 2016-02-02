@@ -127,10 +127,10 @@ If the email module has an option as to how to deliver emails (SMTP, log to stdo
 I now keep my test files in the same directory as their corresponding code and use filename extension naming conventions to distinguish tests from production code.
 
 - `foo.js` has the module "foo"'s code
-- `foo.tape.js` has the node-based tests for foo and lives in the same dir
-- `foo.btape.js` can be used for tests that need to execute in a browser environment
+- `foo.prova.js` has the node-based tests for foo and lives in the same dir
+- `foo.bprova.js` can be used for tests that need to execute in a browser environment
 
-I use filesystem globs and the `find . -name '*.tape.js'` command to get access to all my tests as necessary.  
+I use filesystem globs and the `find . -name '*.prova.js'` command to get access to all my tests as necessary.  
 
 ## How to organize code within each `.js` module file
 
