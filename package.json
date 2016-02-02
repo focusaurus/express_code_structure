@@ -7,6 +7,9 @@
     "start": "./app/server.js | bistre",
     "lint": "standard"
   },
+  "engines": {
+    "node": "4.2.6"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/focusaurus/express_code_structure.git"
