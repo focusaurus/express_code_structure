@@ -4,6 +4,8 @@ This project is an example of how to organize a medium-sized express.js web appl
 
 **Current to at least express v4.13 February 2016**
 
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 ## How big is your application?
 
 Web applications are not all the same, and there's not, in my opinion, a single code structure that should be applied to all express.js applications.
