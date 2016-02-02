@@ -2,7 +2,7 @@
 
 This project is an example of how to organize a medium-sized express.js web application.
 
-**Current to at least express v4.11 January 2015**
+**Current to at least express v4.13 February 2016**
 
 ## How big is your application?
 
@@ -46,7 +46,7 @@ For the Rails community, they want to be able to have a single Rails developer s
 * Be size-appropriate
   * Don't create "Mansion Directories" where there's just 1 file all alone 3 directories down. You can see this happening in the [Ansible Best Practices](http://www.ansibleworks.com/docs/playbooks_best_practices.html) that shames small projects into creating 10+ directories to hold 10+ files when 1 directory with 3 files would be much more appropriate. You don't drive a bus to work (unless you're a bus driver, but even then your driving a bus AT work not TO work), so don't create filesystem structures that aren't justified by the actual files inside them.
 * Be modular but pragmatic
-  * The node community overall favors small modules. Anything that can cleanly be separated out from your app entirely should be extracted into a module either for internal use or publically published on npm. However but for the medium-sized applications that are the scope here, the overhead of this can add tedium to your workflow without commensurate value. So for the time when you have some code that is factored out but not enough to justify a completely separate npm module, just consider it a "**proto-module**" with the expectation that when it crosses some size threshold, it would be extracted out.
+  * The node community overall favors small modules. Anything that can cleanly be separated out from your app entirely should be extracted into a module either for internal use or publically published on npm. However, for the medium-sized applications that are the scope here, the overhead of this can add tedium to your workflow without commensurate value. So for the time when you have some code that is factored out but not enough to justify a completely separate npm module, just consider it a "**proto-module**" with the expectation that when it crosses some size threshold, it would be extracted out.
   * Some folks such as [@hij1nx](https://twitter.com/hij1nx) even include an `app/node_modules` directory and have `package.json` files in the **proto-module** directories to facilitate that transition and act as a reminder.
 * Be easy to locate code
   * Given a feature to build or a bug to fix, our goal is that a developer has no struggle locating the source files involved.
@@ -55,7 +55,7 @@ For the Rails community, they want to be able to have a single Rails developer s
 * Be search-friendly
   * all first-party source code is in the `app` directory so you can `cd` there are run find/grep/xargs/ag/ack/etc and not be distracted by third party matches
 * Use simple and obvious naming
-  * npm now seems to require all-lowercase package names. I find this mostly terrible but I must follow the herd, thus filenames should use `kebab-case` even though the variable name for that in JavaScript must be `kebabCase` because `-` is a minus sign in JavaScript.
+  * npm now seems to require all-lowercase package names. I find this mostly terrible but I must follow the herd, thus filenames should use `kebab-case` even though the variable name for that in JavaScript must be `camelCase` because `-` is a minus sign in JavaScript.
   * variable name matches the basename of the module path, but with `kebab-case` transformed to `camelCase`
 * Group by Coupling, Not by Function
   * This is a major departure from the Ruby on Rails convention of `app/views`, `app/controllers`, `app/models`, etc
@@ -65,7 +65,7 @@ For the Rails community, they want to be able to have a single Rails developer s
   * MVC or MOVE style decoupling in terms of which code goes in which module is still encouraged, but spreading the MVC files out into sibling directories is just annoying.
   * Thus each of my routes files has the portion of the routes it owns. A rails-style `routes.rb` file is handy if you want an overview of all routes in the app, but when actually building features and fixing bugs, you only care about the routes relevant to the piece you are changing.
 * Store tests next to the code
-  * This is just an instance of "group by coupling", but I wanted to call it out specifically. I've written many projects where the tests live under a parallel filesystem called "tests" and now that I've started putting my tests in the same directory as their corresponding code, I'm never going back. This is more modular and much easier to work with in text editors and alleviates a lot of the "../../.." path nonsense.
+  * This is just an instance of "group by coupling", but I wanted to call it out specifically. I've written many projects where the tests live under a parallel filesystem called "tests" and now that I've started putting my tests in the same directory as their corresponding code, I'm never going back. This is more modular and much easier to work with in text editors and alleviates a lot of the "../../.." path nonsense. If you are in doubt, try it on a few projects and decide for yourself. I'm not going to do anything beyond this to convince you that it's better.
 * Reduce cross-cutting coupling with Events
   * It's easy to think "OK, whenever a new Deal is created, I want to send an email to all the Salespeople", and then just put the code to send those emails in the route that creates deals.
   * However, this coupling will eventually turn your app into a giant ball of mud.
@@ -81,7 +81,7 @@ For the Rails community, they want to be able to have a single Rails developer s
 * THE ORDER OF MIDDLEWARE AND ROUTES IN EXPRESS MATTERS!!!
   * Almost every routing problem I see on stackoverflow is out-of-order express middleware
   * In general, you want your routes decoupled and not relying on order that much
-  * Don't use `app.use` for your entire application if you really only need that middleware for 2 routes (I'm looking at you, `bodyParser`)
+  * Don't use `app.use` for your entire application if you really only need that middleware for 2 routes (I'm looking at you, `body-parser`)
   * Make sure when all is said and done you have EXACTLY this order:
     1. Any super-important application-wide middleware
     1. All your routes and assorted route middlewares
@@ -102,7 +102,7 @@ So one way to avoid intra-project requires with annoying relative paths like `re
   * No, you should not put "node_modules" into your git repository. Some people will recommend you do this. They are incorrect.
 * Now you can require intra-project modules using this prefix
   * `var config = require("app/config");`
-  * `var DealModel = require("app/deals/DealModel")`;
+  * `var DealModel = require("app/deals/deal-model")`;
 * Basically, this makes intra-project requires work very similarly to requires for external npm modules.
 * Sorry, Windows users, you need to stick with parent directory relative paths.
 
