@@ -23,12 +23,12 @@
   "dependencies": {
     "bole": "2.0.0",
     "express": "4.13.4",
-    "jade": "1.9.1"
+    "jade": "1.11.0"
   },
   "devDependencies": {
     "bistre": "1.0.1",
     "standard": "5.4.1",
-    "supertest": "0.15.0",
-    "tape": "3.2.0"
+    "supertest": "1.1.0",
+    "tape": "4.4.0"
   }
 }
