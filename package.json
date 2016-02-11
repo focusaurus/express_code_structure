@@ -31,7 +31,7 @@
   "devDependencies": {
     "bistre": "1.0.1",
     "prova": "2.1.2",
-    "standard": "5.4.1",
+    "standard": "6.0.4",
     "supertest": "1.1.0"
   }
 }
