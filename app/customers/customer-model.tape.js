@@ -1,4 +1,4 @@
-var test = require('prova')
+var test = require('tape')
 var customer = require('./customer-model')
 
 test('customer.findAll should return an array', function (assert) {
