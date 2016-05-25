@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "bistre": "1.0.1",
-    "standard": "6.0.8",
+    "standard": "7.1.0",
     "supertest": "1.2.0",
     "tap-dot": "1.0.5",
     "tape": "4.5.1"
