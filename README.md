@@ -50,7 +50,7 @@ For the Rails community, they want to be able to have a single Rails developer s
 * Be size-appropriate
   * Don't create "Mansion Directories" where there's just 1 file all alone 3 directories down. You can see this happening in the [Ansible Best Practices](http://www.ansibleworks.com/docs/playbooks_best_practices.html) that shames small projects into creating 10+ directories to hold 10+ files when 1 directory with 3 files would be much more appropriate. You don't drive a bus to work (unless you're a bus driver, but even then your driving a bus AT work not TO work), so don't create filesystem structures that aren't justified by the actual files inside them.
 * Be modular but pragmatic
-  * The node community overall favors small modules. Anything that can cleanly be separated out from your app entirely should be extracted into a module either for internal use or publically published on npm. However, for the medium-sized applications that are the scope here, the overhead of this can add tedium to your workflow without commensurate value. So for the time when you have some code that is factored out but not enough to justify a completely separate npm module, just consider it a "**proto-module**" with the expectation that when it crosses some size threshold, it would be extracted out.
+  * The node community overall favors small modules. Anything that can cleanly be separated out from your app entirely should be extracted into a module either for internal use or publicly published on npm. However, for the medium-sized applications that are the scope here, the overhead of this can add tedium to your workflow without commensurate value. So for the time when you have some code that is factored out but not enough to justify a completely separate npm module, just consider it a "**proto-module**" with the expectation that when it crosses some size threshold, it would be extracted out.
   * Some folks such as [@hij1nx](https://twitter.com/hij1nx) even include an `app/node_modules` directory and have `package.json` files in the **proto-module** directories to facilitate that transition and act as a reminder.
 * Be easy to locate code
   * Given a feature to build or a bug to fix, our goal is that a developer has no struggle locating the source files involved.
@@ -118,7 +118,7 @@ Try to centralize creation of DB connections and pass those into subsystems as o
 
 ### NODE_ENV
 
-This is another enticing but terrible idea carried over from Rails. There should be exactly 1 place in your app, `app/config.js` that looks at the `NODE_ENV` environment variable. Everything else should take an explicit option as a class contsructor argument or module configuration parameter.
+This is another enticing but terrible idea carried over from Rails. There should be exactly 1 place in your app, `app/config.js` that looks at the `NODE_ENV` environment variable. Everything else should take an explicit option as a class constructor argument or module configuration parameter.
 
 If the email module has an option as to how to deliver emails (SMTP, log to stdout, put in queue etc), it should take an option like `{deliver: 'stdout'}` but it should absolutely not check `NODE_ENV`.
 
@@ -130,7 +130,7 @@ I now keep my test files in the same directory as their corresponding code and u
 - `foo.tape.js` has the node-based tests for foo and lives in the same dir
 - `foo.btape.js` can be used for tests that need to execute in a browser environment
 
-I use filesystem globs and the `find . -name '*.tape.js'` command to get access to all my tests as necessary.  
+I use filesystem globs and the `find . -name '*.tape.js'` command to get access to all my tests as necessary.
 
 ## How to organize code within each `.js` module file
 
