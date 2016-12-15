@@ -27,7 +27,7 @@
   "dependencies": {
     "bole": "3.0.2",
     "express": "4.14.0",
-    "jade": "1.11.0"
+    "pug": "2.0.0-beta6"
   },
   "devDependencies": {
     "bistre": "1.0.1",

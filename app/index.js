@@ -3,7 +3,7 @@ var express = require('express')
 var app = express()
 app.set('views', __dirname)
 // use whatever templating system(s) you like
-app.set('view engine', 'jade')
+app.set('view engine', 'pug')
 
 // See the README about ordering of middleware
 // Load the routes ("controllers" -ish)
