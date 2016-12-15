@@ -79,7 +79,9 @@ For the Rails community, they want to be able to have a single Rails developer s
   * Don't do magic things. Don't autoload files from magic directories in the filesystem. Don't be Rails. The app starts at `app/server.js:1` and you can see everything it loads and executes by following the code.
   * Don't make DSLs for your routes. Don't do silly metaprogramming when it is not called for.
   * If your app is so big that doing `magicRESTRouter.route(somecontroller, {except: 'POST'})` is a big win for you over 3 basic `app.get`, `app.put`, `app.del`, calls, you're probably building a monolithic app that is too big to effectively work on. Get fancy for BIG wins, not for converting 3 simple lines to 1 complex line.
-
+* Use lower-kebab-case filenames
+  * This format avoids filesystem case sensitivity issues across platforms
+  * npm forbids uppercase in new package names, and this works well with that
 ## express.js specifics
 * Don't use `app.configure`. It's almost entirely useless and you just don't need it. It is in lots of boilerplate due to mindless copypasta.
 * THE ORDER OF MIDDLEWARE AND ROUTES IN EXPRESS MATTERS!!!
