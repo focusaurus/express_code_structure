@@ -2,7 +2,7 @@
 
 This project is an example of how to organize a medium-sized express.js web application.
 
-**Current to at least express v4.13 February 2016**
+**Current to at least express v4.14 December 2016**
 
 [![Build Status](https://semaphoreci.com/api/v1/projects/0de47c2f-0e4f-4a47-8822-5913023312e1/681770/badge.svg)](https://semaphoreci.com/focusaurus/express_code_structure)
 

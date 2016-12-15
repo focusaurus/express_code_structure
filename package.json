@@ -7,8 +7,9 @@
     "start": "./app/server.js | bistre",
     "lint": "standard"
   },
+  "main": "./app/server",
   "engines": {
-    "node": "4"
+    "node": "6"
   },
   "repository": {
     "type": "git",
@@ -24,15 +25,15 @@
     "url": "https://github.com/focusaurus/express_code_structure/issues"
   },
   "dependencies": {
-    "bole": "2.0.0",
-    "express": "4.13.4",
+    "bole": "3.0.2",
+    "express": "4.14.0",
     "jade": "1.11.0"
   },
   "devDependencies": {
     "bistre": "1.0.1",
-    "standard": "7.1.0",
-    "supertest": "1.2.0",
+    "standard": "8.6.0",
+    "supertest": "2.0.1",
     "tap-dot": "1.0.5",
-    "tape": "4.5.1"
+    "tape": "4.6.3"
   }
 }
