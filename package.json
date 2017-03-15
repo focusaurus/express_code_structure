@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "bole": "3.0.2",
-    "express": "4.14.0",
+    "express": "4.15.2",
     "pug": "2.0.0-beta6"
   },
   "devDependencies": {
     "bistre": "1.0.1",
-    "standard": "8.6.0",
-    "supertest": "2.0.1",
+    "standard": "9.0.1",
+    "supertest": "3.0.0",
     "tap-dot": "1.0.5",
     "tape": "4.6.3"
   }
