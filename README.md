@@ -82,6 +82,7 @@ For the Rails community, they want to be able to have a single Rails developer s
 * Use lower-kebab-case filenames
   * This format avoids filesystem case sensitivity issues across platforms
   * npm forbids uppercase in new package names, and this works well with that
+
 ## express.js specifics
 * Don't use `app.configure`. It's almost entirely useless and you just don't need it. It is in lots of boilerplate due to mindless copypasta.
 * THE ORDER OF MIDDLEWARE AND ROUTES IN EXPRESS MATTERS!!!
@@ -133,6 +134,10 @@ I now keep my test files in the same directory as their corresponding code and u
 - `foo.btape.js` can be used for tests that need to execute in a browser environment
 
 I use filesystem globs and the `find . -name '*.tape.js'` command to get access to all my tests as necessary.
+
+### Integration Tests
+
+Still same principle, but if your integration tests are coupled to the interactions across several subsystems, they go in the parent directory of those subsystems. For this example, that would mean putting integration tests directly in the `app` directory. If you have a lot of integration tests, organize them into subdirectories of `app` according to the same group-by-coupling and associated principles.
 
 ## How to organize code within each `.js` module file
 
