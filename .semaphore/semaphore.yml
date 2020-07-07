@@ -1,39 +1,18 @@
-# Use the latest stable version of Semaphore 2.0 YML syntax:
 version: v1.0
-
-# Name your pipeline. In case you connect multiple pipelines with promotions,
-# the name will help you differentiate between, for example, a CI build phase
-# and delivery phases.
 name: CI Test
-
-# An agent defines the environment in which your code runs.
-# It is a combination of one of available machine types and operating
-# system images.
-# See https://docs.semaphoreci.com/article/20-machine-types
-# and https://docs.semaphoreci.com/article/32-ubuntu-1804-image
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-
-# Blocks are the heart of a pipeline and are executed sequentially.
-# Each block has a task that defines one or more jobs. Jobs define the
-# commands to execute.
-# See https://docs.semaphoreci.com/article/62-concepts
 blocks:
-  - name: Tests
+  - name: Test
     task:
-      env_vars:
-        - name: NODE_ENV
-          value: test
-        - name: CI
-          value: 'true'
-      prologue:
-        commands:
-          - checkout
-          - nvm use
-          - npm install
       jobs:
-        - name: Tests
+        - name: Test
           commands:
+            - checkout
+            - sem-version node 14
+            - cache restore
+            - npm install
+            - cache store
             - npm test
