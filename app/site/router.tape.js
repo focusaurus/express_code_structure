@@ -1,4 +1,4 @@
-var app = require('app/test-app')
+var app = require('../test-app')
 var test = require('tape')
 
 test('app/site/router should serve the favicon', function (assert) {

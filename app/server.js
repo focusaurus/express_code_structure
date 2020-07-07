@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var app = require('./index')
-var config = require('app/config')
+var config = require('./config')
 
 // Use whichever logging system you prefer.
 // Doesn't have to be bole, I just wanted something more or less realistic

@@ -25,15 +25,15 @@
     "url": "https://github.com/focusaurus/express_code_structure/issues"
   },
   "dependencies": {
-    "bole": "3.0.2",
-    "express": "4.15.2",
-    "pug": "2.0.0-beta6"
+    "bole": "4.0.0",
+    "express": "4.17.1",
+    "pug": "3.0.0"
   },
   "devDependencies": {
     "bistre": "1.0.1",
-    "standard": "9.0.1",
-    "supertest": "3.0.0",
-    "tap-dot": "1.0.5",
-    "tape": "4.6.3"
+    "standard": "14.3.4",
+    "supertest": "4.0.2",
+    "tap-dot": "2.0.0",
+    "tape": "5.0.1"
   }
 }
