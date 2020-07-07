@@ -95,24 +95,6 @@ For the Rails community, they want to be able to have a single Rails developer s
     1. THEN error handlers
 * Sadly, being sinatra-inspired, express.js mostly assumes all your routes will be in `server.js` and it will be clear how they are ordered. For a medium-sized application, breaking things out into separate routes modules is nice, but it does introduce peril of out-of-order middleware
 
-## The app symlink trick
-
-There are many approaches outlined and discussed at length by the community in the great gist [Better local require() paths for Node.js](https://gist.github.com/branneman/8048520). I may soon decide to prefer either "just deal with lots of ../../../.." or use the [requireFrom](https://github.com/DSKrepps/requireFrom) modlue. However, at the moment, I've been using the symlink trick detailed below.
-
-So one way to avoid intra-project requires with annoying relative paths like `require("../../../config")` is to use the following trick:
-
-* create a symlink under node_modules for your app
-  * cd node_modules && ln -nsf ../app
-* add **just the node_modules/app symlink itself**, not the entire node_modules folder, to git
-  * git add -f node_modules/app
-  * Yes, you should still have "node_modules" in your `.gitignore` file
-  * No, you should not put "node_modules" into your git repository. Some people will recommend you do this. They are incorrect.
-* Now you can require intra-project modules using this prefix
-  * `var config = require("app/config");`
-  * `var DealModel = require("app/deals/deal-model")`;
-* Basically, this makes intra-project requires work very similarly to requires for external npm modules.
-* Sorry, Windows users, you need to stick with parent directory relative paths.
-
 ## Configuration
 
 Generally code modules and classes to expect only a basic JavaScript `options` object passed in. Only `app/server.js` should load the `app/config.js` module. From there it can synthesize small `options` objects to configure subsystems as needed, but coupling every subsystem to a big global config module full of extra information is bad coupling.
